@@ -1,0 +1,11 @@
+shortener:
+  build: .
+  links:
+    - redis:redis_server
+  ports:
+    - "5000:5000"
+
+redis:
+  image: dockerfile/redis
+
+
