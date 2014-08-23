@@ -26,9 +26,17 @@ keyPrefix = "ragbshortener:"
 @app.route("/<key>", methods=['GET'])
 def get_url(key):
 	try:
-		return redirect(db[keyPrefix + key])
+		redirect(db[keyPrefix + key])
 	except KeyError:
-		return abort(404)
+		abort(404)
+
+@app.rout("/<key>", methods=['DELETE'])
+def delete_url(key):
+	try:
+		db.delete(keyPrefix + key)
+		return "", 200, {}
+	except KeyError:
+		abort(404)
 
 @app.route("/", methods=['POST'])
 def create_url():
